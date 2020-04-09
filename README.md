@@ -1,5 +1,5 @@
-# bBifurcation- map- fddpendulum
-Bifurcation map for of the chaotic motion of the damped driven pendulum
+# Bifurcation-map-dd	pendulum
+Bifurcation map of the chaotic motion for the damped driven pendulum
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODM2MDA0MjhdfQ==
+eyJoaXN0b3J5IjpbLTU0NDA3NTc0N119
 -->
