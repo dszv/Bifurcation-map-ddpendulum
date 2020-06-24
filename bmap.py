@@ -9,6 +9,7 @@ t_0 = 0
 t_N = 1150
 h = 0.001
 
+a = None    # variable must exist in global namespace
 
 def reduce(angle):
     if(angle < 0):
@@ -19,32 +20,32 @@ def reduce(angle):
             angle = angle - 2 * np.pi
     return angle
 
-def f(t , X):
-    return [X[1] , - (1/q) * X[1] - np.sin(X[0]) + a * np.cos(X[2]) , u]
+def f(t, X):
+    return [X[1], - (1/q) * X[1] - np.sin(X[0]) + a * np.cos(X[2]), u]
 
 def main():
-    A = np.linspace(0.5 , 2 , 200)
+    A = np.linspace(0.5, 2, 200)
 
-    fig, ax = plt.subplots(figsize=(16, 12))
+    fig, ax = plt.subplots(figsize = (16, 12))
 
     N = int((t_N - t_0)/h)
-    t = np.linspace(t_0, t_N, N+1)
+    t = np.linspace(t_0, t_N, N + 1)
 
     print("Working on it...")
 
     global a
     for a in A:
         
-        X_0 = [np.pi/4 , 0 , 0]    #initial conditions 
+        X_0 = [np.pi/4, 0, 0]    #initial conditions 
 
-        sol = solve_ivp(f , [t_0, t_N] , X_0 , method = 'DOP853' , t_eval = t) #dense_output=True
+        sol = solve_ivp(f, [t_0, t_N], X_0, method = 'DOP853', t_eval = t)  # dense_output=True
 
         x = sol.y[0].T
-        r = np.empty(N+1 , dtype=float)    #reduced x
+        r = np.empty(N + 1, dtype = float)    #reduced x
         y = sol.y[1].T
         z = sol.y[2].T
 
-        for i in range (N+1):
+        for i in range (N + 1):
             r[i] = reduce(x[i])
 
         j = t_N/(2 * h)
@@ -52,9 +53,9 @@ def main():
         k = np.abs((2 * np.pi)/(h * u))
 
         while(j <= N):
-            #print(n , j)
-            #print(r[int(j)] , y[int(j)])
-            plt.plot(a , np.around(y[int(j)] , 2) , '.' , color = 'blue')
+            # print(n, j)
+            # print(r[int(j)], y[int(j)])
+            plt.plot(a, np.around(y[int(j)], 2), '.', color = 'blue')
             j = j + k
             n = n + 1
 
